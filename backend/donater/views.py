@@ -66,7 +66,7 @@ def project_list(request):
         for prj in obj_list:
             transactions = Transaction.objects.filter(project_id=prj.id)
             have_sum = sum([transaction.sum for transaction in transactions])
-            author_username = User.objects.get(id=prj.author_id).username
+            author_username = User.objects.get(id=prj.author_id.id).username
             prj_attrs = {
                 'author_username': author_username,
                 'title': prj.title,
@@ -81,7 +81,7 @@ def project_list(request):
 
 # TODO:
 def project_exact(request):
-    resp = {'NOT OK': 404}
+    # resp = {'NOT OK': 404}
     if request.method == 'GET':
         req = json.loads(str(request.body, encoding='utf-8'))
         project = Projects.objects.get(id__exact=req['project_id'])

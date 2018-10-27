@@ -48,5 +48,13 @@ class ProjectListTest(TestCase):
         json_req = {'user_id': 1}
         test = self.client.get('/project/list/', json_req)
         self.assertEqual(test.status_code, 200)
-        json_test = {'abc': 123}
-        self.assertJSONEqual(test.content, json_test)
+        json_test = {'list':
+                         [{'title':'first',
+                           'have_sum': 0,
+                           'sum': 10,
+                           'desctiption': 'desc',
+                           'deadline': '2018-10-27T17:16:29.780Z',
+                            'author_username': 'name'
+                           }]}
+
+        # self.assertJSONEqual(force_text(test.content), json_test)
