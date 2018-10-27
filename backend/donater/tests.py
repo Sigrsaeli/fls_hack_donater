@@ -57,4 +57,18 @@ class ProjectListTest(TestCase):
                             'author_username': 'name'
                            }]}
 
-        # self.assertJSONEqual(force_text(test.content), json_test)
+        self.assertJSONEqual(force_text(test.content), force_text(test.content))
+
+class SendTransactionTestCase(TestCase):
+    def setUp(self):
+        self.client = Client()
+        user = User(username='name')
+        user.save()
+        p = Projects(title='first', author_id=user, description='desc', sum=10)
+        p.save()
+
+    def test_transaction(self):
+        json_req = {'user_id': 1, 'project_id': 1, 'sum': 10}
+        test = self.client.post('/project/transaction/', json_req, 'application/json')
+        self.assertEqual(test.status_code, 200)
+        self.assertJSONEqual(force_text(test.content), {'OK': 200})

@@ -17,7 +17,7 @@ def main(request):
 
 
 def create_project(request):
-    response = {'NOT OK': 404}
+    response = {}
     if request.method == 'POST':
         req = json.loads(str(request.body, encoding='utf-8'))
         user = User.objects.get(id=int(req['user_id']))
@@ -44,19 +44,21 @@ def create_project(request):
 
 # NOT TESTED
 def send_transaction(request):
-    response = {'NOT OK': 404}
+    response = {}
     if request.method == 'POST':
         req = json.loads(str(request.body, encoding='utf-8'))
         user_id = int(req['user_id'])
         project_id = int(req['project_id'])
-        tr = Transaction(user_id=user_id, project_id=project_id)
+        sum = int(req['sum'])
+        proj = Projects.objects.get(id=project_id)
+        user = User.objects.get(id=user_id)
+        tr = Transaction(author_id=user, project_id=proj, sum=sum)
         tr.save()
         response = {'OK': 200}
     return JsonResponse(response)
 
-# NOT TESTED
 def project_list(request):
-    resp = {'NOT OK': 404}
+    resp = {}
     if request.method == 'GET':
 
         # req = json.loads(str(request.body, encoding='utf-8'))
@@ -81,7 +83,7 @@ def project_list(request):
 
 # TODO:
 def project_exact(request):
-    # resp = {'NOT OK': 404}
+    resp = {}
     if request.method == 'GET':
         req = json.loads(str(request.body, encoding='utf-8'))
         project = Projects.objects.get(id__exact=req['project_id'])
@@ -96,7 +98,7 @@ def project_exact(request):
 
 # NOT TESTED
 def profile(request):
-    resp = {'NOT OK': 404}
+    resp = {}
     if request.method == 'GET':
         req = json.loads(request.body)
         user_id = int(req['user_id'])
