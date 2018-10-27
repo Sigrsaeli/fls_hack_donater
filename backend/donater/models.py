@@ -15,5 +15,5 @@ class Project(models.Model):
 
 class Transaction(models.Model):
     author_id = models.ForeignKey(User, on_delete=models.CASCADE)
-    project_id = models.ForeignKey(Projects, on_delete=models.CASCADE)
+    project_id = models.ForeignKey(Project, on_delete=models.CASCADE)
     sum = models.IntegerField()

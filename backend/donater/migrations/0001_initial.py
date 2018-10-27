@@ -32,7 +32,7 @@ class Migration(migrations.Migration):
                 ('id', models.AutoField(auto_created=True, primary_key=True, serialize=False, verbose_name='ID')),
                 ('sum', models.IntegerField()),
                 ('author_id', models.ForeignKey(on_delete=django.db.models.deletion.CASCADE, to=settings.AUTH_USER_MODEL)),
-                ('project_id', models.ForeignKey(on_delete=django.db.models.deletion.CASCADE, to='donater.Projects')),
+                ('project_id', models.ForeignKey(on_delete=django.db.models.deletion.CASCADE, to='donater.Project')),
             ],
         ),
     ]
