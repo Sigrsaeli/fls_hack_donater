@@ -1,6 +1,5 @@
 import json
 
-from django.db.models import Model
 from django.http import JsonResponse, HttpResponse
 from django.shortcuts import render
 
@@ -34,6 +33,8 @@ def create_project(request):
         response = {'OK': 200}
     return JsonResponse(response)
 
+
+# NOT TESTED
 def send_transaction(request):
     response = {'NOT OK': 404}
     if request.method == 'POST':
