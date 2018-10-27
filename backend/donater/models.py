@@ -6,12 +6,12 @@ from django.contrib.auth.models import User
 class Projects(models.Model):
     author_id = models.ForeignKey(User, on_delete=models.CASCADE)
     title = models.TextField(max_length=255)
-    description = models.TextField()
-    attachment = models.BinaryField()
+    description = models.TextField(null=True)
+    attachment = models.BinaryField(null=True)
     sum = models.IntegerField()
-    tags = models.TextField()
+    tags = models.TextField(null=True)
     deadline = models.DateTimeField(auto_now=True)
-    promise = models.TextField()
+    promise = models.TextField(default='money')
 
 class Transaction(models.Model):
     author_id = models.ForeignKey(User, on_delete=models.CASCADE)

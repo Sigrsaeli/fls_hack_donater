@@ -20,9 +20,9 @@ from donater import views
 urlpatterns = [
     path('admin/', admin.site.urls),
     path('', views.main),
-    path('/project/create/', views.create_project),
-    path('/project/transaction/', views.send_transaction),
-    path('/project/list/', views.project_list),
-    path('/project/exact/', views.project_exact),
-    path('/profile/', views.profile)
+    path('project/create/', views.create_project),
+    path('project/transaction/', views.send_transaction),
+    path('project/list/', views.project_list),
+    path('project/exact/', views.project_exact),
+    path('profile/', views.profile)
 ]

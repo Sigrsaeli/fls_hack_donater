@@ -9,29 +9,35 @@ from donater.models import Projects, Transaction
 
 
 def main(request):
-    return HttpResponse('Hello')
+    a = {'resp': 10}
+    # return HttpResponse('Hello')
+    return JsonResponse(a)
 
 
 # NOT TESTED
 def create_project(request):
     response = {'NOT OK': 404}
     if request.method == 'POST':
-        req = json.load(request.body)
-        user_id = int(req['user_id'])
+        req = json.loads(str(request.body, encoding='utf-8'))
+        user = User.objects.get(id=int(req['user_id']))
         title = req['title']
         desc = req['description']
-        attach = ''
-        if req['attachment']:
+        attach = None
+        if hasattr(req, 'attachment'):
             attach = req['attachment']
         summ = int(req['sum'])
-        tags = req['tags']
+        tags = None
+        if hasattr(req, 'tags'):
+            tags = req['tags']
         promise = req['promise']
-        proj = Projects(user_id=user_id, title=title,
+        proj = Projects(author_id=user, title=title,
                         description=desc, attachment=attach,
                         sum=summ, tags=tags, promise=promise)
         proj.save()
         # user_id = req['user_id']
         response = {'OK': 200}
+    elif request.method == 'GET':
+        response = {'USE POST': 404}
     return JsonResponse(response)
 
 
@@ -83,7 +89,7 @@ def project_exact(request):
         project.promise
         project.tags
         resp = {}
-    return project
+    return JsonResponse(resp)
 
 
 # NOT TESTED
@@ -109,3 +115,4 @@ def profile(request):
         resp['username'] = user.username
         resp['list'] = proj_list
     return JsonResponse(resp)
+
