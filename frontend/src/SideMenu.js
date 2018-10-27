@@ -1,7 +1,33 @@
 import React, { Component } from "react";
-import { Menu } from "antd";
-import styled from "styled-components";
+import { Menu, Icon } from "antd";
+const SubMenu = Menu.SubMenu;
 
-const SideMenu = styled(Menu)``;
+export default () => (
+  <Menu theme="dark" defaultSelectedKeys={["1"]} mode="inline">
+    <Menu.Item key="0">
+      <span>Logo</span>
+    </Menu.Item>
+    <Menu.Item key="1">
+      <Icon type="pie-chart" />
+      <span>Categories</span>
+    </Menu.Item>
 
-export default SideMenu;
+    <SubMenu
+      key="sub1"
+      title={
+        <span>
+          <Icon type="user" />
+          <span>User</span>
+        </span>
+      }
+    >
+      <Menu.Item key="3">Your projects</Menu.Item>
+      <Menu.Item key="4">Your Donation</Menu.Item>
+      <Menu.Item key="5">Logout</Menu.Item>
+    </SubMenu>
+    <Menu.Item key="6">
+      <Icon type="logout" />
+      <span>Logout</span>
+    </Menu.Item>
+  </Menu>
+);
