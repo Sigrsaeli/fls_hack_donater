@@ -19,5 +19,6 @@ from donater import views
 
 urlpatterns = [
     path('admin/', admin.site.urls),
-    path('', views.main)
+    path('', views.main),
+    path('/project/create/', views.create_project)
 ]
