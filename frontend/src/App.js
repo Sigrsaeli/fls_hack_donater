@@ -27,10 +27,9 @@ class App extends Component {
   }
 
   componentDidMount() {
-    fetch(API.PROJECTS).then(
-      response => this.setState({ hits: response.json() })
-      // console.log(response.json().title)
-    );
+    fetch(API.PROJECTS)
+      .then(response => response.json())
+      .then(response => this.setState({ hits: response }));
   }
 
   render() {

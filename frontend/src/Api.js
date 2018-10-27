@@ -1,4 +1,4 @@
-const ENDPOINT = "https://2daf0eff.ngrok.io";
+const ENDPOINT = "http://a8df82da.ngrok.io";
 
 export const API = {
   PROJECTS: `${ENDPOINT}/project/list/`
