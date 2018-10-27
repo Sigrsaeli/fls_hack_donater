@@ -1,7 +1,7 @@
 import React, { Component } from "react";
 import "./App.css";
 import { Layout, Menu, Breadcrumb, Icon, Avatar, Card } from "antd";
-
+import { API } from "./Api";
 // costum
 import ProjectCard from "./ProjectCard";
 
@@ -27,7 +27,7 @@ class App extends Component {
   }
 
   componentDidMount() {
-    fetch("https://2daf0eff.ngrok.io/project/list/").then(
+    fetch(API.PROJECTS).then(
       response => this.setState({ hits: response.json() })
       // console.log(response.json().title)
     );
