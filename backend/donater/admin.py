@@ -1,7 +1,7 @@
 from django.contrib import admin
 
 # Register your models here.
-from donater.models import Project, Transaction
+from donater.models import Projects, Transaction
 
-admin.site.register(Project)
+admin.site.register(Projects)
 admin.site.register(Transaction)

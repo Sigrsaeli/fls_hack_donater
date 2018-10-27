@@ -3,7 +3,7 @@ from django.contrib.auth.models import User
 
 # Create your models here.
 
-class Project(models.Model):
+class Projects(models.Model):
     author_id = models.ForeignKey(User, on_delete=models.CASCADE)
     title = models.TextField(max_length=255)
     description = models.TextField(null=True)
@@ -15,5 +15,5 @@ class Project(models.Model):
 
 class Transaction(models.Model):
     author_id = models.ForeignKey(User, on_delete=models.CASCADE)
-    project_id = models.ForeignKey(Project, on_delete=models.CASCADE)
+    project_id = models.ForeignKey(Projects, on_delete=models.CASCADE)
     sum = models.IntegerField()

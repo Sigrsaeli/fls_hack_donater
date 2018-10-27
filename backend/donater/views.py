@@ -5,7 +5,7 @@ from django.http import JsonResponse, HttpResponse
 from django.shortcuts import render
 
 # Create your views here.
-from donater.models import Project, Transaction
+from donater.models import Projects, Transaction
 
 
 def main(request):
@@ -30,9 +30,9 @@ def create_project(request):
         if hasattr(req, 'tags'):
             tags = req['tags']
         promise = req['promise']
-        proj = Project(author_id=user, title=title,
-                       description=desc, attachment=attach,
-                       sum=summ, tags=tags, promise=promise)
+        proj = Projects(author_id=user, title=title,
+                        description=desc, attachment=attach,
+                        sum=summ, tags=tags, promise=promise)
         proj.save()
         # user_id = req['user_id']
         response = {'OK': 200}
@@ -59,7 +59,7 @@ def project_list(request):
     if request.method == 'GET':
         req = json.load(request.body)
         user = req['user_id']
-        obj_list = Project.objects.all()
+        obj_list = Projects.objects.all()
         list = []
         for prj in obj_list:
             transactions = Transaction.objects.filter(project_id=prj.id)
@@ -82,7 +82,7 @@ def project_exact(request):
     resp = {'NOT OK': 404}
     if request.method == 'GET':
         req = json.load(request)
-        project = Project.objects.get(id__exact=req['project_id'])
+        project = Projects.objects.get(id__exact=req['project_id'])
         deadline = project.deadline
         project.sum
         project.title
@@ -99,7 +99,7 @@ def profile(request):
         req = json.load(request.body)
         user_id = int(req['user_id'])
         user = User.objects.get(id=user_id)
-        queryset_project = Project.objects.all().filter(id=user_id)
+        queryset_project = Projects.objects.all().filter(id=user_id)
         proj_list = []
         for q in queryset_project:
             proj = {}

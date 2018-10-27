@@ -6,6 +6,8 @@ from django.test.utils import setup_test_environment
 from django.utils.encoding import force_text
 
 # Create your tests here.
+from donater.models import Projects
+
 
 class CreateProjectTestCase(TestCase):
     def setUp(self):
@@ -32,4 +34,21 @@ class MainTestCase(TestCase):
     def setUp(self):
         self.client = Client()
 
-    # def
+    def test_main(self):
+        test = self.client.get('/')
+        self.assertEqual(test.status_code, 200)
+        self.assertJSONEqual(str(test.content, encoding='utf-8'), {"resp": 10}, '/ not ok')
+
+class ProjectListTest(TestCase):
+    def setUp(self):
+        self.client = Client()
+        user = User(username='name')
+        user.save()
+        p = Projects(title='first', author_id=user, description='desc', sum=10)
+        p.save()
+
+    def test_project_list(self):
+        test = self.client.get('/project/list/')
+        self.assertEqual(test.status_code, 200)
+        json_test = {'abc': 123}
+        self.assertJSONEqual(str(test.content, encoding='utf-8'), json_test)
