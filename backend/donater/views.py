@@ -5,7 +5,7 @@ from django.http import JsonResponse, HttpResponse
 from django.shortcuts import render
 
 # Create your views here.
-from donater.models import Projects
+from donater.models import Projects, Transaction
 
 
 def main(request):
@@ -23,7 +23,7 @@ def create_project(request):
         attach = ''
         if req['attachment']:
             attach = req['attachment']
-        summ = req['sum']
+        summ = int(req['sum'])
         tags = req['tags']
         promise = req['promise']
         proj = Projects(user_id=user_id, title=title,
@@ -33,4 +33,24 @@ def create_project(request):
         # user_id = req['user_id']
         response = {'OK': 200}
     return JsonResponse(response)
+
+def send_transaction(request):
+    response = {'NOT OK': 404}
+    if request.method == 'POST':
+        req = json.load(request.body)
+        user_id = int(req['user_id'])
+        project_id = int(req['project_id'])
+        tr = Transaction(user_id=user_id, project_id=project_id)
+        tr.save()
+        response = {'OK': 200}
+    return JsonResponse(response)
+
+def project_list(request):
+    pass
+
+def project_exact(request):
+    pass
+
+def profile(request):
+    pass
 
