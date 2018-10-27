@@ -29,7 +29,7 @@ class App extends Component {
   componentDidMount() {
     fetch(API.PROJECTS)
       .then(response => response.json())
-      .then(response => this.setState({ hits: response }));
+      .then(response => this.setState({ hits: response.list }));
   }
 
   render() {
@@ -73,7 +73,7 @@ class App extends Component {
         <Layout>
           <Content style={{ margin: "10px 30px" }}>
             <div style={{ padding: 24, background: "#fff", minHeight: 360 }}>
-              {Object.keys(hits).map(hit => (
+              {hits.map(hit => (
                 <ProjectCard title={hit.title} sum={hit.sum} />
               ))}
             </div>
