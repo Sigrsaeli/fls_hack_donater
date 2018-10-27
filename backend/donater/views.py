@@ -1,13 +1,15 @@
 import json
 
-from django.contrib.auth.models import User
+from django.contrib.auth.models import User, Group
 from django.http import JsonResponse, HttpResponse
 from django.shortcuts import render
 
 # Create your views here.
 from django.utils.encoding import force_text
+from rest_framework import viewsets
 
 from donater.models import Projects, Transaction
+from donater.serializers import UserSerializer, GroupSerializer
 
 
 def main(request):
@@ -57,6 +59,7 @@ def send_transaction(request):
     return JsonResponse(response)
 
 
+# TEST WITH USERS
 def project_list(request):
     resp = {}
     if request.method == 'GET':
@@ -102,7 +105,6 @@ def project_exact(request):
     return JsonResponse(resp)
 
 
-# NOT TESTED
 def profile(request):
     resp = {}
     if request.method == 'POST':
@@ -125,3 +127,20 @@ def profile(request):
         resp['username'] = user.username
         resp['list'] = proj_list
     return JsonResponse(resp)
+
+
+
+class UserViewSet(viewsets.ModelViewSet):
+    """
+    API endpoint that allows users to be viewed or edited.
+    """
+    queryset = User.objects.all().order_by('-date_joined')
+    serializer_class = UserSerializer
+
+
+class GroupViewSet(viewsets.ModelViewSet):
+    """
+    API endpoint that allows groups to be viewed or edited.
+    """
+    queryset = Group.objects.all()
+    serializer_class = GroupSerializer

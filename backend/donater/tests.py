@@ -89,3 +89,9 @@ class ProjectExactTestCase(TestCase):
         test = self.client.post('/project/exact/', json_req, 'application/json')
         self.assertEqual(test.status_code, 200)
         self.assertJSONNotEqual(force_text(test.content), {})
+
+class ProfileTestCase(TestCase):
+    def setUp(self):
+        self.client = Client()
+        user = User(username='name')
+        user.save()

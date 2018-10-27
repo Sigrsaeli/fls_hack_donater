@@ -13,16 +13,28 @@ Including another URLconf
     1. Import the include() function: from django.urls import include, path
     2. Add a URL to urlpatterns:  path('blog/', include('blog.urls'))
 """
+from django.conf.urls import url
 from django.contrib import admin
-from django.urls import path
+from django.contrib.auth.models import User
+from django.urls import path, include
 from donater import views
+
+from rest_framework import routers
+
+router = routers.DefaultRouter()
+router.register(r'users', views.UserViewSet)
+router.register(r'groups', views.GroupViewSet)
 
 urlpatterns = [
     path('admin/', admin.site.urls),
-    path('', views.main),
+    # path('', views.main),
     path('project/create/', views.create_project),
     path('project/transaction/', views.send_transaction),
     path('project/list/', views.project_list),
     path('project/exact/', views.project_exact),
-    path('profile/', views.profile)
+    path('profile/', views.profile),
+    # url(r'^api-auth/', include('rest_framework.urls', )),
+    url(r'^', include(router.urls)),
+    path('rest-auth/', include('rest_auth.urls')),
+    url(r'^o/', include('oauth2_provider.urls', namespace='oauth2_provider')),
 ]

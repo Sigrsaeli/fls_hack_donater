@@ -1,1 +1,7 @@
-pip3 install django-cors-headers
+pip install django-cors-headers
+pip install djangorestframework
+pip install markdown
+pip install django-filter
+pip install django-rest-auth
+pip install django-oauth-toolkit
+pip install django-cors-middleware
