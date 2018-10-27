@@ -27,9 +27,9 @@ class App extends Component {
   }
 
   componentDidMount() {
-    fetch("http://127.0.0.1:8000/project/list/").then(
+    fetch("https://2daf0eff.ngrok.io/project/list/").then(
       response => this.setState({ hits: response.json() })
-      // console.log(response.json())
+      // console.log(response.json().title)
     );
   }
 
@@ -74,8 +74,8 @@ class App extends Component {
         <Layout>
           <Content style={{ margin: "10px 30px" }}>
             <div style={{ padding: 24, background: "#fff", minHeight: 360 }}>
-              {hits.map(hit => (
-                <ProjectCard title={hit} />
+              {Object.keys(hits).map(hit => (
+                <ProjectCard title={hit.title} sum={hit.sum} />
               ))}
             </div>
           </Content>
