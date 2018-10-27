@@ -5,6 +5,8 @@ from django.http import JsonResponse, HttpResponse
 from django.shortcuts import render
 
 # Create your views here.
+from django.utils.encoding import force_text
+
 from donater.models import Projects, Transaction
 
 
@@ -14,7 +16,6 @@ def main(request):
     return JsonResponse(a)
 
 
-# NOT TESTED
 def create_project(request):
     response = {'NOT OK': 404}
     if request.method == 'POST':
@@ -57,8 +58,9 @@ def send_transaction(request):
 def project_list(request):
     resp = {'NOT OK': 404}
     if request.method == 'GET':
-        req = json.loads(str(request.body, encoding='utf-8'))
-        user = req['user_id']
+
+        # req = json.loads(str(request.body, encoding='utf-8'))
+        # user = req['user_id']
         obj_list = Projects.objects.all()
         list = []
         for prj in obj_list:
@@ -74,7 +76,7 @@ def project_list(request):
             }
             list.append(prj_attrs)
         resp['list'] = list
-        resp['username'] = user.username
+        # resp['username'] = user.username
     return JsonResponse(resp)
 
 # TODO:
@@ -96,7 +98,7 @@ def project_exact(request):
 def profile(request):
     resp = {'NOT OK': 404}
     if request.method == 'GET':
-        req = json.loads(str(request.body, encoding='utf-8'))
+        req = json.loads(request.body)
         user_id = int(req['user_id'])
         user = User.objects.get(id=user_id)
         queryset_project = Projects.objects.all().filter(id=user_id)

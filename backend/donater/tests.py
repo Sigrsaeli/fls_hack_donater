@@ -33,7 +33,7 @@ class MainTestCase(TestCase):
     def test_main(self):
         test = self.client.get('/')
         self.assertEqual(test.status_code, 200)
-        self.assertJSONEqual(str(test.content, encoding='utf-8'), {"resp": 10})
+        self.assertJSONEqual(force_text(test.content), {"resp": 10})
 
 
 class ProjectListTest(TestCase):
@@ -45,7 +45,8 @@ class ProjectListTest(TestCase):
         p.save()
 
     def test_project_list(self):
-        test = self.client.get('/project/list/')
+        json_req = {'user_id': 1}
+        test = self.client.get('/project/list/', json_req)
         self.assertEqual(test.status_code, 200)
         json_test = {'abc': 123}
-        self.assertJSONEqual(str(test.content, encoding='utf-8'), json_test)
+        self.assertJSONEqual(test.content, json_test)
