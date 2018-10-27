@@ -45,7 +45,7 @@ def create_project(request):
 def send_transaction(request):
     response = {'NOT OK': 404}
     if request.method == 'POST':
-        req = json.load(request.body)
+        req = json.loads(str(request.body, encoding='utf-8'))
         user_id = int(req['user_id'])
         project_id = int(req['project_id'])
         tr = Transaction(user_id=user_id, project_id=project_id)
@@ -57,7 +57,7 @@ def send_transaction(request):
 def project_list(request):
     resp = {'NOT OK': 404}
     if request.method == 'GET':
-        req = json.load(request.body)
+        req = json.loads(str(request.body, encoding='utf-8'))
         user = req['user_id']
         obj_list = Projects.objects.all()
         list = []
@@ -81,7 +81,7 @@ def project_list(request):
 def project_exact(request):
     resp = {'NOT OK': 404}
     if request.method == 'GET':
-        req = json.load(request)
+        req = json.loads(str(request.body, encoding='utf-8'))
         project = Projects.objects.get(id__exact=req['project_id'])
         deadline = project.deadline
         project.sum
@@ -96,7 +96,7 @@ def project_exact(request):
 def profile(request):
     resp = {'NOT OK': 404}
     if request.method == 'GET':
-        req = json.load(request.body)
+        req = json.loads(str(request.body, encoding='utf-8'))
         user_id = int(req['user_id'])
         user = User.objects.get(id=user_id)
         queryset_project = Projects.objects.all().filter(id=user_id)
