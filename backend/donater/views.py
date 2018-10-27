@@ -42,7 +42,6 @@ def create_project(request):
     return JsonResponse(response)
 
 
-# NOT TESTED
 def send_transaction(request):
     response = {}
     if request.method == 'POST':
@@ -56,6 +55,7 @@ def send_transaction(request):
         tr.save()
         response = {'OK': 200}
     return JsonResponse(response)
+
 
 def project_list(request):
     resp = {}
@@ -81,25 +81,31 @@ def project_list(request):
         # resp['username'] = user.username
     return JsonResponse(resp)
 
-# TODO:
+# NOT TESTED
 def project_exact(request):
     resp = {}
-    if request.method == 'GET':
+    if request.method == 'POST':
         req = json.loads(str(request.body, encoding='utf-8'))
-        project = Projects.objects.get(id__exact=req['project_id'])
+        project = Projects.objects.get(id=int(req['project_id']))
         deadline = project.deadline
-        project.sum
-        project.title
-        project.promise
-        project.tags
-        resp = {}
+        sum = project.sum
+        title = project.title
+        promise = project.promise
+        tags = project.tags
+        resp = {
+            'deadline': deadline,
+            'sum': sum,
+            'title': title,
+            'promise': promise,
+            'tags': tags
+        }
     return JsonResponse(resp)
 
 
 # NOT TESTED
 def profile(request):
     resp = {}
-    if request.method == 'GET':
+    if request.method == 'POST':
         req = json.loads(request.body)
         user_id = int(req['user_id'])
         user = User.objects.get(id=user_id)
@@ -119,4 +125,3 @@ def profile(request):
         resp['username'] = user.username
         resp['list'] = proj_list
     return JsonResponse(resp)
-

@@ -49,15 +49,17 @@ class ProjectListTest(TestCase):
         test = self.client.get('/project/list/', json_req)
         self.assertEqual(test.status_code, 200)
         json_test = {'list':
-                         [{'title':'first',
+                         [{'title': 'first',
                            'have_sum': 0,
                            'sum': 10,
                            'desctiption': 'desc',
                            'deadline': '2018-10-27T17:16:29.780Z',
-                            'author_username': 'name'
+                           'author_username': 'name'
                            }]}
 
-        self.assertJSONEqual(force_text(test.content), force_text(test.content))
+        # self.assertJSONEqual(force_text(test.content), force_text(test.content))
+        self.assertJSONNotEqual(force_text(test.content), {})
+
 
 class SendTransactionTestCase(TestCase):
     def setUp(self):
@@ -72,3 +74,18 @@ class SendTransactionTestCase(TestCase):
         test = self.client.post('/project/transaction/', json_req, 'application/json')
         self.assertEqual(test.status_code, 200)
         self.assertJSONEqual(force_text(test.content), {'OK': 200})
+        self.assertJSONNotEqual(force_text(test.content), {})
+
+class ProjectExactTestCase(TestCase):
+    def setUp(self):
+        self.client = Client()
+        user = User(username='name')
+        user.save()
+        p = Projects(title='first', author_id=user, description='desc', sum=10)
+        p.save()
+
+    def test_exact_proj(self):
+        json_req = {'project_id': 1}
+        test = self.client.post('/project/exact/', json_req, 'application/json')
+        self.assertEqual(test.status_code, 200)
+        self.assertJSONNotEqual(force_text(test.content), {})
