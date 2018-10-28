@@ -1,11 +1,8 @@
 import json
 
 from django.contrib.auth.models import User, Group
-from django.http import JsonResponse, HttpResponse
-from django.shortcuts import render
+from django.http import JsonResponse
 
-# Create your views here.
-from django.utils.encoding import force_text
 from rest_framework import viewsets
 
 from donater.models import Projects, Transaction
@@ -65,6 +62,7 @@ def project_list(request):
     if request.method == 'GET':
 
         # req = json.loads(str(request.body, encoding='utf-8'))
+
         # user = req['user_id']
         obj_list = Projects.objects.all()
         list = []
@@ -77,14 +75,14 @@ def project_list(request):
                 'title': prj.title,
                 'sum': prj.sum,
                 'have_sum': have_sum,
-                'deadline': prj.deadline
+                'deadline': prj.deadline,
+                'project_id': prj.id
             }
             list.append(prj_attrs)
         resp['list'] = list
         # resp['username'] = user.username
     return JsonResponse(resp)
 
-# NOT TESTED
 def project_exact(request):
     resp = {}
     if request.method == 'POST':

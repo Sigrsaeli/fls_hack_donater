@@ -26,6 +26,7 @@ class CreateProjectTestCase(TestCase):
         self.assertJSONEqual(force_text(test1.content), {'OK': 200})
 
 
+"""
 class MainTestCase(TestCase):
     def setUp(self):
         self.client = Client()
@@ -34,6 +35,7 @@ class MainTestCase(TestCase):
         test = self.client.get('/')
         self.assertEqual(test.status_code, 200)
         self.assertJSONEqual(force_text(test.content), {"resp": 10})
+"""
 
 
 class ProjectListTest(TestCase):
@@ -76,6 +78,7 @@ class SendTransactionTestCase(TestCase):
         self.assertJSONEqual(force_text(test.content), {'OK': 200})
         self.assertJSONNotEqual(force_text(test.content), {})
 
+
 class ProjectExactTestCase(TestCase):
     def setUp(self):
         self.client = Client()
@@ -89,6 +92,7 @@ class ProjectExactTestCase(TestCase):
         test = self.client.post('/project/exact/', json_req, 'application/json')
         self.assertEqual(test.status_code, 200)
         self.assertJSONNotEqual(force_text(test.content), {})
+
 
 class ProfileTestCase(TestCase):
     def setUp(self):
