@@ -5,6 +5,7 @@ from django.test import TestCase, Client
 from django.test.utils import setup_test_environment
 from django.utils.encoding import force_text
 
+
 # Create your tests here.
 from donater.models import Projects
 
@@ -90,8 +91,11 @@ class ProjectExactTestCase(TestCase):
     def test_exact_proj(self):
         json_req = {'project_id': 1}
         test = self.client.post('/project/exact/', json_req, 'application/json')
+        a = {"title": "some project", "have_sum": 0, "sum": 10, "deadline": "2018-10-27T19:11:51.700Z", "project_id": 1,
+             "author_username": "svyatoslav"}
         self.assertEqual(test.status_code, 200)
         self.assertJSONNotEqual(force_text(test.content), {})
+        self.assertJSONEqual(force_text(test.content), a)
 
 
 class ProfileTestCase(TestCase):
