@@ -1,4 +1,4 @@
-@import '~antd/dist/antd.css';
+@import "~antd/dist/antd.css";
 
 .App {
   text-align: center;
@@ -31,4 +31,11 @@
   to {
     transform: rotate(360deg);
   }
+}
+
+.ant-modal .login-form-forgot {
+  float: right;
+}
+.ant-modal .login-form-button {
+  width: 100%;
 }

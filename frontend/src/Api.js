@@ -4,5 +4,6 @@ export const API = {
   PROJECTS: `${ENDPOINT}/project/list/`,
   EXACT: `${ENDPOINT}/project/exact/`,
   TRANSACTION: `${ENDPOINT}/project/transaction/`,
-  AUTHORIZE: `${ENDPOINT}/rest-auth/login/`
+  LOG_IN: `${ENDPOINT}/rest-auth/login/`,
+  LOG_OUT: `${ENDPOINT}/rest-auth/logout/`
 };
