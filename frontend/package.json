@@ -7,10 +7,6 @@
     "react": "^16.6.0",
     "react-cookie": "^3.0.4",
     "react-dom": "^16.6.0",
-<<<<<<< HEAD
-=======
-    "react-router": "^4.3.1",
->>>>>>> 92c05c7a07cb4a5bda0d96d30344850afe8ee8e7
     "react-router-dom": "^4.3.1",
     "react-scripts": "2.0.5",
     "styled-components": "^4.0.2"

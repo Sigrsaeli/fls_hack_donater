@@ -1,7 +1,6 @@
-import React, { Component } from "react";
+import React from "react";
 import styled from "styled-components";
 import { Icon, Avatar, Card } from "antd";
-import AppRouter from "./TestRouting";
 
 const ProjectCard = styled(Card)`
   width: 50%;
@@ -21,7 +20,6 @@ export default ({
   deadline
 }) => (
   <ProjectCard
-    projectId={projectId}
     hoverable="true"
     cover={
       <img
@@ -31,7 +29,7 @@ export default ({
     }
     actions={[
       <Icon type="heart" />,
-      <Icon type="message" />,
+      <Icon type="message" />
       // <Icon
       //   type="eye"
       //   theme="outlined"
@@ -40,7 +38,6 @@ export default ({
       //     onIconClick(projectId);
       //   }}
       // />,
-      <AppRouter id={projectId} />
     ]}
   >
     <Meta
