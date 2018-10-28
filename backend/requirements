@@ -5,3 +5,5 @@ pip install django-filter
 pip install django-rest-auth
 pip install django-oauth-toolkit
 pip install django-cors-middleware
+pip install yandex-money-sdk
+pip install --upgrade yandex_checkout

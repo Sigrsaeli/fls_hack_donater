@@ -15,11 +15,14 @@ Including another URLconf
 """
 from django.conf.urls import url
 from django.contrib import admin
-from django.contrib.auth.models import User
 from django.urls import path, include
+from django.views.generic import TemplateView
+# from example.app.views import OrderPage
+
 from donater import views
 
 from rest_framework import routers
+
 
 router = routers.DefaultRouter()
 router.register(r'users', views.UserViewSet)

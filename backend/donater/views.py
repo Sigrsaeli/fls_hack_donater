@@ -9,7 +9,6 @@ from rest_framework import viewsets
 from donater.models import Projects, Transaction
 from donater.serializers import UserSerializer, GroupSerializer
 
-
 def main(request):
     a = {'resp': 10}
     # return HttpResponse('Hello')
