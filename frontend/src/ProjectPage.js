@@ -1,45 +1,10 @@
 import React, { Component } from "react";
-import "./App.css";
 import { Layout, Menu, Breadcrumb, Icon, Avatar, Card } from "antd";
-import { API } from "./Api";
-import {Link, BrowserRouter, Router} from "react-router-dom"
-// costum
-import ProjectCard from "./ProjectCard";
-import ProjectPage from "./ProjectPage";
+
 const { Header, Content, Footer, Sider } = Layout;
 
-const SubMenu = Menu.SubMenu;
-class App extends Component {
-  state = {
-    collapsed: false
-  };
-
-  onCollapse = collapsed => {
-    console.log(collapsed);
-    this.setState({ collapsed });
-  };
-
-  constructor(props) {
-    super(props);
-
-    this.state = {
-      hits: []
-    };
-
-  }
-
-  componentDidMount() {
-
-    console.log('did mount', API);
-    fetch(API.PROJECTS)
-      .then(response => response.json())
-      .then(response => this.setState({ hits: response.list }));
-  };
-
-  render() {
-    const { hits } = this.state;
+render(){
     return (
-      <Router>
       <Layout style={{ minHeight: "100vh" }}>
         <Sider
           collapsible
@@ -78,23 +43,13 @@ class App extends Component {
         <Layout>
           <Content style={{ margin: "10px 30px" }}>
             <div style={{ padding: 24, background: "#fff", minHeight: 360 }}>
-              {hits.map(hit => (
-                
-                <Link to="/project_page"><ProjectCard title={hit.title} sum={hit.sum} /></Link>
-                
-              ))}
-
-              {/* {hits.map(h => (
-                <p>{h.title}</p>
-              ))} */}
-              <Route path="/project_page" component={ProjectPage} />
+                <ProjectCard title='Just title' sum='123124' />
             </div>
           </Content>
           <Footer style={{ textAlign: "center" }}>Desing by Lazy Nerds</Footer>
         </Layout>
       </Layout>
-    </Router>
     );
-  }
 }
-export default App;
+
+export default ProjectPage;
