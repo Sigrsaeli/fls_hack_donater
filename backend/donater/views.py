@@ -2,7 +2,7 @@ import json
 
 from django.contrib.auth.models import User, Group
 from django.http import JsonResponse
-from django.views.decorators.csrf import csrf_protect
+from django.views.decorators.csrf import ensure_csrf_cookie
 
 from rest_framework import viewsets
 
@@ -15,7 +15,7 @@ def main(request):
     # return HttpResponse('Hello')
     return JsonResponse(a)
 
-@csrf_protect
+@ensure_csrf_cookie
 def create_project(request):
     response = {}
     if request.method == 'POST':
@@ -41,7 +41,7 @@ def create_project(request):
         response = {'USE POST': 404}
     return JsonResponse(response)
 
-@csrf_protect
+@ensure_csrf_cookie
 def send_transaction(request):
     response = {}
     if request.method == 'POST':
@@ -58,6 +58,7 @@ def send_transaction(request):
 
 
 # TEST WITH USERS
+
 def project_list(request):
     resp = {}
     if request.method == 'GET':
@@ -84,7 +85,7 @@ def project_list(request):
         # resp['username'] = user.username
     return JsonResponse(resp)
 
-@csrf_protect
+@ensure_csrf_cookie
 def project_exact(request):
     resp = {}
     if request.method == 'POST':
@@ -104,7 +105,7 @@ def project_exact(request):
         }
     return JsonResponse(resp)
 
-@csrf_protect
+@ensure_csrf_cookie
 def profile(request):
     resp = {}
     if request.method == 'POST':
