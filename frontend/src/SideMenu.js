@@ -3,7 +3,12 @@ import { Menu, Icon } from "antd";
 const SubMenu = Menu.SubMenu;
 
 export default () => (
-  <Menu theme="dark" defaultSelectedKeys={["1"]} mode="inline">
+  <Menu
+    style={{ position: "inherit", zIndex: 1000 }}
+    theme="dark"
+    defaultSelectedKeys={["1"]}
+    mode="inline"
+  >
     <Menu.Item key="0">
       <span>Logo</span>
     </Menu.Item>

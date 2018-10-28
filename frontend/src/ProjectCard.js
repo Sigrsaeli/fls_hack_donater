@@ -1,6 +1,7 @@
 import React, { Component } from "react";
 import styled from "styled-components";
 import { Icon, Avatar, Card } from "antd";
+import AppRouter from "./TestRouting";
 
 const ProjectCard = styled(Card)`
   width: 50%;
@@ -10,8 +11,17 @@ const ProjectCard = styled(Card)`
 
 const { Meta } = Card;
 
-export default ({ title, sum, have_sum, author_username, deadline }) => (
+export default ({
+  projectId,
+  title,
+  sum,
+  have_sum,
+  author_username,
+  onIconClick,
+  deadline
+}) => (
   <ProjectCard
+    projectId={projectId}
     hoverable="true"
     cover={
       <img
@@ -19,7 +29,19 @@ export default ({ title, sum, have_sum, author_username, deadline }) => (
         src="https://gw.alipayobjects.com/zos/rmsportal/JiqGstEfoWAOHiTxclqi.png"
       />
     }
-    actions={[<Icon type="heart" />, <Icon type="message" />]}
+    actions={[
+      <Icon type="heart" />,
+      <Icon type="message" />,
+      // <Icon
+      //   type="eye"
+      //   theme="outlined"
+      //   onClick={e => {
+      //     e.preventDefault();
+      //     onIconClick(projectId);
+      //   }}
+      // />,
+      <AppRouter id={projectId} />
+    ]}
   >
     <Meta
       avatar={

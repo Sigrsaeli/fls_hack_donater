@@ -7,6 +7,12 @@ import {Link, BrowserRouter, Router} from "react-router-dom"
 import ProjectCard from "./ProjectCard";
 import ProjectPage from "./ProjectPage";
 import Menu from "./SideMenu";
+<<<<<<< HEAD
+import CSRFToken from "./Csrftoken";
+import { withCookies, Cookies } from "react-cookie";
+
+=======
+>>>>>>> 92c05c7a07cb4a5bda0d96d30344850afe8ee8e7
 const { Header, Content, Footer, Sider } = Layout;
 const SubMenu = Menu.SubMenu;
 
@@ -18,8 +24,6 @@ class App extends Component {
   onCollapse = collapsed => {
     console.log(collapsed);
     this.setState({ collapsed });
-    this.handleLoginClick = this.handleLoginClick.bind(this);
-    this.handleLogoutClick = this.handleLogoutClick.bind(this);
   };
 
   constructor(props) {
@@ -29,6 +33,24 @@ class App extends Component {
       hits: []
     };
 
+<<<<<<< HEAD
+    this.getCard = this.getCard.bind(this);
+  }
+  getCookie(name) {
+    var cookieValue = null;
+    if (document.cookie && document.cookie !== "") {
+      var cookies = document.cookie.split(";");
+      for (var i = 0; i < cookies.length; i++) {
+        var cookie = cookies[i].trim();
+        if (cookie.substring(0, name.length + 1) === name + "=") {
+          cookieValue = decodeURIComponent(cookie.substring(name.length + 1));
+          break;
+        }
+      }
+    }
+    return cookieValue;
+=======
+>>>>>>> 92c05c7a07cb4a5bda0d96d30344850afe8ee8e7
   }
 
   componentDidMount() {
@@ -39,13 +61,48 @@ class App extends Component {
       .then(response => this.setState({ hits: response.list }));
   };
 
+  getCard(id) {
+    let data = {
+      username: "Jhon",
+      title: "Some title",
+      sum: 100,
+      have_sum: 0,
+      author_username: "Tom",
+      deadline: "30",
+      id: id
+    };
+    console.log(data);
+
+    // var csrftoken = this.getCookie("csrftoken");
+    // console.log(csrf);
+    // var data = {
+    //   project_id: id
+    // };
+
+    // fetch(API.EXACT, {
+    //   method: "POST",
+    //   body: JSON.stringify(data),
+    //   headers: {
+    //     Accept: "application/json",
+    //     "Content-Type": "application/json",
+    //     "X-CSRFToken": csrftoken
+    //   }
+    // }).then(response => console.log(response));
+    // .then(response => this.setState({ hits: response.list }));
+  }
+
   render() {
     const { hits } = this.state;
 
     return (
+<<<<<<< HEAD
+      <Layout style={{ minHeight: "100hv" }}>
+=======
       <Router>
       <Layout style={{ minHeight: "100vh" }}>
+>>>>>>> 92c05c7a07cb4a5bda0d96d30344850afe8ee8e7
         <Sider
+          style={{ position: "inherit", zIndex: 1000 }}
           collapsible
           collapsed={this.state.collapsed}
           onCollapse={this.onCollapse}
@@ -63,6 +120,8 @@ class App extends Component {
                   sum={hit.sum}
                   extra={hit.deadline}
                   deadline={hit.deadline}
+                  projectId={hit.project_id}
+                  onIconClick={this.getCard}
                 />
               ))}
 
