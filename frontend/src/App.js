@@ -2,7 +2,7 @@ import React, { Component } from "react";
 import "./App.css";
 import { Layout, Breadcrumb, Icon, Avatar, Card } from "antd";
 import { BrowserRouter, Switch, Route, Redirect } from "react-router-dom";
-
+import { API } from "./Api";
 import ProjectFeed from "./ProjectFeed";
 import ProjectPage from "./ProjectPage";
 import Menu from "./SideMenu";
@@ -27,6 +27,8 @@ class App extends Component {
     };
   }
 
+  onCom;
+
   getCard(id) {
     let data = {
       username: "Jhon",
@@ -39,7 +41,17 @@ class App extends Component {
     };
     console.log(data);
   }
-
+  componentDidMount() {
+    const formData = new FormData();
+    formData.append("username", "Nikita");
+    formData.append("email", "n1ikita@mail.ru");
+    formData.append("password", "1");
+    fetch(API.AUTHORIZE, {
+      method: "POST",
+      headers: { "Content-Type": "application/json" },
+      body: formData
+    }).then(response => response.json());
+  }
   render() {
     return (
       <BrowserRouter>

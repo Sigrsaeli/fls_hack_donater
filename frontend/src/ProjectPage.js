@@ -1,7 +1,7 @@
 import React, { Component } from "react";
 import { Layout, Menu, Breadcrumb, Icon, Avatar, Card } from "antd";
 import { API } from "./Api";
-import ProjectCard from "./ProjectCard";
+import ExactProject from "./ExactProject";
 const { Header, Content, Footer, Sider } = Layout;
 
 export default class ProjectPage extends Component {
@@ -27,7 +27,7 @@ export default class ProjectPage extends Component {
     );
     return (
       (project && (
-        <ProjectCard
+        <ExactProject
           title={project.title}
           sum={project.sum}
           extra={project.deadline}

@@ -1,6 +1,8 @@
-const ENDPOINT = "https://6b95bff1.eu.ngrok.io";
+const ENDPOINT = "http://9ba27bbd.eu.ngrok.io";
 
 export const API = {
   PROJECTS: `${ENDPOINT}/project/list/`,
-  EXACT: `${ENDPOINT}/project/exact/`
+  EXACT: `${ENDPOINT}/project/exact/`,
+  TRANSACTION: `${ENDPOINT}/project/transaction/`,
+  AUTHORIZE: `${ENDPOINT}/rest-auth/login/`
 };
